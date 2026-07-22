@@ -23,6 +23,13 @@ margin, opacity, colors, per-badge toggles and processed image types
 (Primary/Thumb/Backdrop) are all configurable in
 **Dashboard → Plugins → DarkFlux Quality Overlay**.
 
+Badge position: the global **Badge position** option (default TopRight) sets
+the corner for all images; the optional **Episode badge position** override
+(v1.1.0.0) lets Episode images use a different corner — useful when a client
+(e.g. Wholphin, whose episode label and unwatched count sit top-right) draws
+its own overlay there. Changes apply live and re-render via the image cache
+key — no Jellyfin restart or cache wipe needed.
+
 Movies, episodes and series are badged. A series has no streams of its own, so
 episode streams are aggregated (capped at 100 episodes) and the series poster
 shows the best available quality.
@@ -91,6 +98,13 @@ Optionally package with [jprm](https://github.com/oddstr13/jellyfin-plugin-repos
   any DV episode shows `DV`), matching the resolution badge semantics.
 - Clients that cached un-badged posters pick up badged versions on their next
   ETag revalidation.
+
+## Changelog
+
+- **1.1.0.0** — optional **Episode badge position** override (separate corner
+  for Episode images); effective position is part of the image cache key so
+  changes re-render immediately.
+- **1.0.0.0** — initial public release.
 
 ## Verified on
 
