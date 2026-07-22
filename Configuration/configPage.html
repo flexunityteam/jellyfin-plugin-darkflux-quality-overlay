@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>DarkFlux Quality Overlay</title>
+</head>
+<body>
+<div id="QualityOverlayConfigPage" data-role="page" class="page type-interior pluginConfigurationPage"
+     data-require="emby-input,emby-button,emby-checkbox,emby-select">
+    <div data-role="content">
+        <div class="content-primary">
+            <form id="QualityOverlayConfigForm">
+                <div class="verticalSection">
+                    <h2 class="sectionTitle">DarkFlux Quality Overlay</h2>
+                    <p class="fieldDescription">Overlay resolution, HDR, audio and rating badges onto images in memory. Original files are never modified. Fork of Quality Overlay by obxidion (GPL-3.0).</p>
+                </div>
+
+                <div class="verticalSection">
+                    <h3 class="checkboxListLabel">Badges</h3>
+                    <div class="checkboxContainer">
+                        <label>
+                            <input is="emby-checkbox" type="checkbox" id="EnableVideoQualityBadge" />
+                            <span>Show resolution badge (4K / 1080p / 720p / SD)</span>
+                        </label>
+                    </div>
+                    <div class="checkboxContainer">
+                        <label>
+                            <input is="emby-checkbox" type="checkbox" id="EnableHdrBadge" />
+                            <span>Show HDR badge (DV / HDR10+ / HDR10 / HLG / HDR)</span>
+                        </label>
+                    </div>
+                    <div class="checkboxContainer">
+                        <label>
+                            <input is="emby-checkbox" type="checkbox" id="EnableAudioCodecBadge" />
+                            <span>Show audio badge (Atmos / DTS:X / TrueHD / DTS-HD)</span>
+                        </label>
+                    </div>
+                    <div class="checkboxContainer">
+                        <label>
+                            <input is="emby-checkbox" type="checkbox" id="EnableRatingBadge" />
+                            <span>Show community rating badge</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="verticalSection">
+                    <h3 class="checkboxListLabel">Image types</h3>
+                    <div class="checkboxContainer">
+                        <label>
+                            <input is="emby-checkbox" type="checkbox" id="ProcessPrimary" />
+                            <span>Primary (poster)</span>
+                        </label>
+                    </div>
+                    <div class="checkboxContainer">
+                        <label>
+                            <input is="emby-checkbox" type="checkbox" id="ProcessThumb" />
+                            <span>Thumbnail</span>
+                        </label>
+                    </div>
+                    <div class="checkboxContainer">
+                        <label>
+                            <input is="emby-checkbox" type="checkbox" id="ProcessBackdrop" />
+                            <span>Backdrop</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="selectContainer">
+                    <label class="selectLabel" for="Position">Badge position</label>
+                    <select is="emby-select" id="Position" class="emby-select-withcolor emby-select">
+                        <option value="TopLeft">Top left</option>
+                        <option value="TopRight">Top right</option>
+                        <option value="BottomLeft">Bottom left</option>
+                        <option value="BottomRight">Bottom right</option>
+                    </select>
+                </div>
+
+                <div class="inputContainer">
+                    <label class="inputLabel inputLabelUnfocused" for="BadgeScale">Badge size (scale)</label>
+                    <input is="emby-input" type="number" id="BadgeScale" step="0.05" min="0.3" max="3" />
+                    <div class="fieldDescription">Relative to image size. 1.0 is the default.</div>
+                </div>
+
+                <div class="inputContainer">
+                    <label class="inputLabel inputLabelUnfocused" for="Margin">Margin (px)</label>
+                    <input is="emby-input" type="number" id="Margin" step="1" min="0" max="200" />
+                </div>
+
+                <div class="inputContainer">
+                    <label class="inputLabel inputLabelUnfocused" for="BackgroundOpacity">Background opacity</label>
+                    <input is="emby-input" type="number" id="BackgroundOpacity" step="0.05" min="0" max="1" />
+                    <div class="fieldDescription">0 is fully transparent, 1 is fully opaque.</div>
+                </div>
+
+                <div class="inputContainer">
+                    <label class="inputLabel inputLabelUnfocused" for="BackgroundColor">Background color</label>
+                    <input is="emby-input" type="color" id="BackgroundColor" />
+                </div>
+
+                <div class="inputContainer">
+                    <label class="inputLabel inputLabelUnfocused" for="TextColor">Text color</label>
+                    <input is="emby-input" type="color" id="TextColor" />
+                </div>
+
+                <div class="inputContainer">
+                    <label class="inputLabel inputLabelUnfocused" for="AccentColor">Accent color (resolution fill + borders)</label>
+                    <input is="emby-input" type="color" id="AccentColor" />
+                </div>
+
+                <div class="inputContainer">
+                    <label class="inputLabel inputLabelUnfocused" for="ResolutionTextColor">Resolution badge text color</label>
+                    <input is="emby-input" type="color" id="ResolutionTextColor" />
+                </div>
+
+                <div class="inputContainer">
+                    <label class="inputLabel inputLabelUnfocused" for="RatingColor">Rating badge color</label>
+                    <input is="emby-input" type="color" id="RatingColor" />
+                </div>
+
+                <div class="inputContainer">
+                    <label class="inputLabel inputLabelUnfocused" for="CacheExpirationHours">Cache expiration (hours)</label>
+                    <input is="emby-input" type="number" id="CacheExpirationHours" step="1" min="0" max="8760" />
+                    <div class="fieldDescription">Set to 0 to keep processed images until the source image changes.</div>
+                </div>
+
+                <div>
+                    <button is="emby-button" type="submit" class="raised button-submit block emby-button">
+                        <span>Save</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        (function () {
+            var QualityOverlayConfig = { pluginUniqueId: '30f92a03-d99d-4886-9919-8ecdcc7f1f74' };
+
+            function toHexColor(value, fallback) {
+                if (!value) {
+                    return fallback;
+                }
+                return value.charAt(0) === '#' ? value : '#' + value;
+            }
+
+            document.querySelector('#QualityOverlayConfigPage').addEventListener('pageshow', function () {
+                Dashboard.showLoadingMsg();
+                ApiClient.getPluginConfiguration(QualityOverlayConfig.pluginUniqueId).then(function (config) {
+                    document.querySelector('#EnableVideoQualityBadge').checked = config.EnableVideoQualityBadge;
+                    document.querySelector('#EnableHdrBadge').checked = config.EnableHdrBadge;
+                    document.querySelector('#EnableAudioCodecBadge').checked = config.EnableAudioCodecBadge;
+                    document.querySelector('#EnableRatingBadge').checked = config.EnableRatingBadge;
+                    document.querySelector('#ProcessPrimary').checked = config.ProcessPrimary;
+                    document.querySelector('#ProcessThumb').checked = config.ProcessThumb;
+                    document.querySelector('#ProcessBackdrop').checked = config.ProcessBackdrop;
+                    document.querySelector('#Position').value = config.Position;
+                    document.querySelector('#BadgeScale').value = config.BadgeScale;
+                    document.querySelector('#Margin').value = config.Margin;
+                    document.querySelector('#BackgroundOpacity').value = config.BackgroundOpacity;
+                    document.querySelector('#BackgroundColor').value = toHexColor(config.BackgroundColor, '#070c0e');
+                    document.querySelector('#TextColor').value = toHexColor(config.TextColor, '#dff3ee');
+                    document.querySelector('#AccentColor').value = toHexColor(config.AccentColor, '#00d4aa');
+                    document.querySelector('#ResolutionTextColor').value = toHexColor(config.ResolutionTextColor, '#052520');
+                    document.querySelector('#RatingColor').value = toHexColor(config.RatingColor, '#ffd479');
+                    document.querySelector('#CacheExpirationHours').value = config.CacheExpirationHours;
+                }).catch(function () {
+                    Dashboard.alert('Unable to load Quality Overlay settings.');
+                }).finally(function () {
+                    Dashboard.hideLoadingMsg();
+                });
+            });
+
+            document.querySelector('#QualityOverlayConfigForm').addEventListener('submit', function (e) {
+                e.preventDefault();
+                Dashboard.showLoadingMsg();
+                ApiClient.getPluginConfiguration(QualityOverlayConfig.pluginUniqueId).then(function (config) {
+                    config.EnableVideoQualityBadge = document.querySelector('#EnableVideoQualityBadge').checked;
+                    config.EnableHdrBadge = document.querySelector('#EnableHdrBadge').checked;
+                    config.EnableAudioCodecBadge = document.querySelector('#EnableAudioCodecBadge').checked;
+                    config.EnableRatingBadge = document.querySelector('#EnableRatingBadge').checked;
+                    config.ProcessPrimary = document.querySelector('#ProcessPrimary').checked;
+                    config.ProcessThumb = document.querySelector('#ProcessThumb').checked;
+                    config.ProcessBackdrop = document.querySelector('#ProcessBackdrop').checked;
+                    config.Position = document.querySelector('#Position').value;
+                    config.BadgeScale = parseFloat(document.querySelector('#BadgeScale').value);
+                    config.Margin = parseInt(document.querySelector('#Margin').value, 10);
+                    config.BackgroundOpacity = parseFloat(document.querySelector('#BackgroundOpacity').value);
+                    config.BackgroundColor = document.querySelector('#BackgroundColor').value;
+                    config.TextColor = document.querySelector('#TextColor').value;
+                    config.AccentColor = document.querySelector('#AccentColor').value;
+                    config.ResolutionTextColor = document.querySelector('#ResolutionTextColor').value;
+                    config.RatingColor = document.querySelector('#RatingColor').value;
+                    config.CacheExpirationHours = parseInt(document.querySelector('#CacheExpirationHours').value, 10);
+
+                    return ApiClient.updatePluginConfiguration(QualityOverlayConfig.pluginUniqueId, config).then(function (result) {
+                        Dashboard.processPluginConfigurationUpdateResult(result);
+                    });
+                }).catch(function () {
+                    Dashboard.hideLoadingMsg();
+                    Dashboard.alert('Unable to save Quality Overlay settings.');
+                });
+                return false;
+            });
+        })();
+    </script>
+</div>
+</body>
+</html>

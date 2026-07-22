@@ -1,0 +1,30 @@
+DarkFlux Quality Overlay
+========================
+
+Copyright (C) 2026 DarkFlux (flexunityteam)
+
+This project is a fork of "Quality Overlay" by obxidion:
+https://github.com/obxidion/Jellyfin-Quality-Overlay
+
+The original work is licensed under the GNU General Public License v3.0
+(GPL-3.0); this fork remains under GPL-3.0 (see LICENSE). Thanks to the
+original author for the middleware image-interception architecture, disk
+image cache, renderer and configuration page this project builds on.
+
+Changes relative to the upstream project (v1.0.9 base):
+
+- Added HDR badge (DV / HDR10+ / HDR10 / HLG / HDR) resolved from the best
+  VideoRangeType/VideoRange across an item's video streams.
+- Added community-rating badge (star + one-decimal rating).
+- Audio badge changed to a compact best-stream label:
+  Atmos / DTS:X / TrueHD / DTS-HD.
+- Series posters: episode media streams are aggregated (via ILibraryManager,
+  capped at 100 episodes, 6 h in-memory cache) so series show best-available
+  quality badges; upstream showed no badges on series.
+- Badging restricted to Movie / Episode / Series items.
+- Restyled badges (DarkFlux): top-right pill stack, solid teal resolution
+  pill, dark translucent pills with teal border, amber rating; new
+  configuration fields (EnableHdrBadge, EnableRatingBadge, AccentColor,
+  ResolutionTextColor, RatingColor); defaults TopRight / Primary only.
+- New plugin identity (name, GUID, assembly name) so the fork never clashes
+  with the original plugin.
