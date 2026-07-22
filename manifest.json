@@ -8,6 +8,14 @@
         "category": "Metadata",
         "versions": [
             {
+                "version": "1.1.0.0",
+                "changelog": "Add optional EpisodePosition override (separate badge corner for Episode images) to avoid client overlays.",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/flexunityteam/jellyfin-plugin-darkflux-quality-overlay/releases/download/v1.1.0.0/darkflux-quality-overlay_1.1.0.0.zip",
+                "checksum": "acf1dbb16f162be95808abcc2f52af0b",
+                "timestamp": "2026-07-22T19:12:31Z"
+            },
+            {
                 "version": "1.0.0.0",
                 "changelog": "Initial public release.",
                 "targetAbi": "10.11.0.0",
