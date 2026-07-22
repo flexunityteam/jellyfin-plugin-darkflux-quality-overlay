@@ -14,6 +14,8 @@ public class PluginConfiguration : BasePluginConfiguration
 
     public BadgePosition Position { get; set; } = BadgePosition.TopRight;
 
+    public BadgePosition? EpisodePosition { get; set; }
+
     public double BadgeScale { get; set; } = 1.0;
 
     public int Margin { get; set; } = 18;

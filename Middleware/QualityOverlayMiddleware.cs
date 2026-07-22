@@ -77,9 +77,14 @@ public partial class QualityOverlayMiddleware
             return;
         }
 
+        // Episodes may use a dedicated badge corner; everything else uses the global one.
+        var position = item is MediaBrowser.Controller.Entities.TV.Episode
+            ? config.EpisodePosition ?? config.Position
+            : config.Position;
+
         var versionTicks = item.DateModified.ToUniversalTime().Ticks;
         var queryString = context.Request.QueryString.HasValue ? context.Request.QueryString.Value : null;
-        var cacheKey = _cache.BuildKey(request.ItemId, request.ImageType, request.ImageIndex, queryString, versionTicks, labels, config);
+        var cacheKey = _cache.BuildKey(request.ItemId, request.ImageType, request.ImageIndex, queryString, versionTicks, labels, position, config);
 
         var etag = $"\"qo-{cacheKey[..32]}\"";
 
@@ -130,7 +135,7 @@ public partial class QualityOverlayMiddleware
         byte[]? processed = null;
         try
         {
-            processed = _renderer.Render(source, contentType, labels, config);
+            processed = _renderer.Render(source, contentType, labels, position, config);
         }
         catch (Exception ex)
         {

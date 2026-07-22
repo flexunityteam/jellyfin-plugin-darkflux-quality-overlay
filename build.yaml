@@ -1,6 +1,6 @@
 name: "DarkFlux Quality Overlay"
 guid: "30f92a03-d99d-4886-9919-8ecdcc7f1f74"
-version: "1.0.0.0"
+version: "1.1.0.0"
 targetAbi: "10.11.0.0"
 framework: "net9.0"
 owner: "flexunityteam"
@@ -12,6 +12,6 @@ description: >
   every client (Android TV, mobile, web, Infuse, ...) sees the badges.
   Fork of obxidion's Quality Overlay (GPL-3.0); see NOTICE for changes.
 category: "Metadata"
-changelog: "Initial public release."
+changelog: "Add optional EpisodePosition override (separate badge corner for Episode images) to avoid client overlays."
 artifacts:
   - "Jellyfin.Plugin.DarkFluxQualityOverlay.dll"

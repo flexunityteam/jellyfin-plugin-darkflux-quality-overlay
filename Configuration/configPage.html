@@ -75,6 +75,18 @@
                     </select>
                 </div>
 
+                <div class="selectContainer">
+                    <label class="selectLabel" for="EpisodePosition">Episode badge position (optional)</label>
+                    <select is="emby-select" id="EpisodePosition" class="emby-select-withcolor emby-select">
+                        <option value="">Same as global</option>
+                        <option value="TopLeft">Top left</option>
+                        <option value="TopRight">Top right</option>
+                        <option value="BottomLeft">Bottom left</option>
+                        <option value="BottomRight">Bottom right</option>
+                    </select>
+                    <div class="fieldDescription">Overrides the global position for Episode images only — useful when a client draws its own overlay (episode number, unwatched count) in the same corner.</div>
+                </div>
+
                 <div class="inputContainer">
                     <label class="inputLabel inputLabelUnfocused" for="BadgeScale">Badge size (scale)</label>
                     <input is="emby-input" type="number" id="BadgeScale" step="0.05" min="0.3" max="3" />
@@ -154,6 +166,7 @@
                     document.querySelector('#ProcessThumb').checked = config.ProcessThumb;
                     document.querySelector('#ProcessBackdrop').checked = config.ProcessBackdrop;
                     document.querySelector('#Position').value = config.Position;
+                    document.querySelector('#EpisodePosition').value = config.EpisodePosition || '';
                     document.querySelector('#BadgeScale').value = config.BadgeScale;
                     document.querySelector('#Margin').value = config.Margin;
                     document.querySelector('#BackgroundOpacity').value = config.BackgroundOpacity;
@@ -182,6 +195,7 @@
                     config.ProcessThumb = document.querySelector('#ProcessThumb').checked;
                     config.ProcessBackdrop = document.querySelector('#ProcessBackdrop').checked;
                     config.Position = document.querySelector('#Position').value;
+                    config.EpisodePosition = document.querySelector('#EpisodePosition').value || null;
                     config.BadgeScale = parseFloat(document.querySelector('#BadgeScale').value);
                     config.Margin = parseInt(document.querySelector('#Margin').value, 10);
                     config.BackgroundOpacity = parseFloat(document.querySelector('#BackgroundOpacity').value);

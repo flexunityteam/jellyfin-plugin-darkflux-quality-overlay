@@ -10,7 +10,7 @@ public class BadgeRenderer
     private const byte BorderAlpha = 89; // 0.35
     private const byte RatingBorderAlpha = 76; // 0.30
 
-    public byte[]? Render(byte[] source, string contentType, IReadOnlyList<BadgeLabel> labels, PluginConfiguration config)
+    public byte[]? Render(byte[] source, string contentType, IReadOnlyList<BadgeLabel> labels, BadgePosition position, PluginConfiguration config)
     {
         if (labels.Count == 0)
         {
@@ -79,8 +79,8 @@ public class BadgeRenderer
         var textHeight = fontMetrics.Descent - fontMetrics.Ascent;
         var badgeHeight = textHeight + (paddingY * 2);
         var totalHeight = (badgeHeight * badges.Count) + (gap * (badges.Count - 1));
-        var isBottom = config.Position is BadgePosition.BottomLeft or BadgePosition.BottomRight;
-        var isRight = config.Position is BadgePosition.TopRight or BadgePosition.BottomRight;
+        var isBottom = position is BadgePosition.BottomLeft or BadgePosition.BottomRight;
+        var isRight = position is BadgePosition.TopRight or BadgePosition.BottomRight;
 
         var currentY = isBottom
             ? bitmap.Height - margin - totalHeight

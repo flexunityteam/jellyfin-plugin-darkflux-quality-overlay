@@ -27,6 +27,7 @@ public class ImageCacheService
         string? queryString,
         long versionTicks,
         IReadOnlyList<BadgeLabel> labels,
+        BadgePosition position,
         PluginConfiguration config)
     {
         var builder = new StringBuilder();
@@ -41,7 +42,7 @@ public class ImageCacheService
             builder.Append('|').Append(label.Text);
         }
 
-        builder.Append('|').Append(config.Position);
+        builder.Append('|').Append(position);
         builder.Append('|').Append(config.BadgeScale.ToString(CultureInfo.InvariantCulture));
         builder.Append('|').Append(config.Margin);
         builder.Append('|').Append(config.BackgroundOpacity.ToString(CultureInfo.InvariantCulture));
