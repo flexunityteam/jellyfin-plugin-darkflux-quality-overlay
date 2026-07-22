@@ -1,0 +1,20 @@
+[
+    {
+        "guid": "30f92a03-d99d-4886-9919-8ecdcc7f1f74",
+        "name": "DarkFlux Quality Overlay",
+        "description": "Draws resolution (4K/1080p/720p/SD), HDR (DV/HDR10+/HDR10/HLG), best-audio (Atmos/DTS:X/TrueHD/DTS-HD) and community-rating badges onto poster images in memory while they are served - original files are never modified, and every client (Android TV, mobile, web, Infuse, ...) sees the badges. Fork of obxidion's Quality Overlay (GPL-3.0).\n",
+        "overview": "Resolution, HDR, audio and rating badges on poster images, rendered in memory.",
+        "owner": "flexunityteam",
+        "category": "Metadata",
+        "versions": [
+            {
+                "version": "1.0.0.0",
+                "changelog": "Initial public release.",
+                "targetAbi": "10.11.0.0",
+                "sourceUrl": "https://github.com/flexunityteam/jellyfin-plugin-darkflux-quality-overlay/releases/download/v1.0.0.0/darkflux-quality-overlay_1.0.0.0.zip",
+                "checksum": "4c28871e23e3193747b89128f868b27b",
+                "timestamp": "2026-07-22T20:37:00Z"
+            }
+        ]
+    }
+]
